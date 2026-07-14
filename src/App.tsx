@@ -22,6 +22,10 @@ export default function App() {
     importBuilds,
     importError,
     clearImportError,
+    shareBuilds,
+    shareCopied,
+    shareNotice,
+    shareError,
   } = useBuilds()
   const { theme, toggleTheme } = useTheme()
 
@@ -50,7 +54,11 @@ export default function App() {
             onAdd={() => setFormMode({ type: 'add' })}
             onExport={exportBuilds}
             onImport={(file) => void importBuilds(file)}
+            onShare={shareBuilds}
+            shareCopied={shareCopied}
             importError={importError}
+            shareNotice={shareNotice}
+            shareError={shareError}
             onClearImportError={clearImportError}
             theme={theme}
             onToggleTheme={toggleTheme}

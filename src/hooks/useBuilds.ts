@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { buildShareUrl, consumeSharedBuildsFromLocation } from '../lib/share'
 import {
   downloadJson,
   exportBuildsJson,
@@ -29,14 +30,49 @@ function normalizeParamsInput(params: BuildParams): BuildParams {
   return out
 }
 
+function bootFromStorageAndShare(): {
+  builds: BuildEntry[]
+  shareNotice: string | null
+  shareError: string | null
+} {
+  const existing = loadBuilds()
+  const shared = consumeSharedBuildsFromLocation()
+  if (!shared) {
+    return { builds: existing, shareNotice: null, shareError: null }
+  }
+  if (!shared.ok) {
+    return { builds: existing, shareNotice: null, shareError: shared.error }
+  }
+  const merged = mergeBuilds(existing, shared.builds)
+  saveBuilds(merged)
+  return {
+    builds: merged,
+    shareNotice: `Imported ${shared.builds.length} build${shared.builds.length === 1 ? '' : 's'} from share link`,
+    shareError: null,
+  }
+}
+
 export function useBuilds() {
-  const [builds, setBuilds] = useState<BuildEntry[]>(() => loadBuilds())
+  const [boot] = useState(bootFromStorageAndShare)
+  const [builds, setBuilds] = useState<BuildEntry[]>(() => boot.builds)
   const [search, setSearch] = useState('')
   const [importError, setImportError] = useState<string | null>(null)
+  const [shareNotice, setShareNotice] = useState<string | null>(() => boot.shareNotice)
+  const [shareError, setShareError] = useState<string | null>(() => boot.shareError)
+  const [shareCopied, setShareCopied] = useState(false)
 
   useEffect(() => {
     saveBuilds(builds)
   }, [builds])
+
+  useEffect(() => {
+    if (!shareNotice && !shareError) return
+    const id = window.setTimeout(() => {
+      setShareNotice(null)
+      setShareError(null)
+    }, 5000)
+    return () => window.clearTimeout(id)
+  }, [shareNotice, shareError])
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
@@ -110,6 +146,26 @@ export function useBuilds() {
 
   const clearImportError = useCallback(() => setImportError(null), [])
 
+  const shareBuilds = useCallback(async () => {
+    if (builds.length === 0) {
+      setShareError('Add at least one build before sharing')
+      setShareNotice(null)
+      return
+    }
+    try {
+      const link = buildShareUrl(builds)
+      await navigator.clipboard.writeText(link)
+      setShareCopied(true)
+      setShareNotice('Share link copied')
+      setShareError(null)
+      window.setTimeout(() => setShareCopied(false), 1500)
+    } catch {
+      const link = buildShareUrl(builds)
+      window.prompt('Copy share link:', link)
+      setShareNotice('Share link ready — copy from the prompt')
+    }
+  }, [builds])
+
   return {
     builds,
     filtered,
@@ -122,5 +178,9 @@ export function useBuilds() {
     importBuilds,
     importError,
     clearImportError,
+    shareBuilds,
+    shareCopied,
+    shareNotice,
+    shareError,
   }
 }

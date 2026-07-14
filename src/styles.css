@@ -289,6 +289,14 @@ a:hover {
   text-align: right;
 }
 
+.toolbar-notice {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--accent);
+  max-width: 300px;
+  text-align: right;
+}
+
 .search-bar input {
   width: 100%;
   padding: 0.65rem 0.85rem;
@@ -845,6 +853,11 @@ a:hover {
   }
 
   .toolbar-error {
+    text-align: left;
+    max-width: none;
+  }
+
+  .toolbar-notice {
     text-align: left;
     max-width: none;
   }

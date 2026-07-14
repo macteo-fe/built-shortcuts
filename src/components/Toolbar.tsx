@@ -5,7 +5,11 @@ type ToolbarProps = {
   onAdd: () => void
   onExport: () => void
   onImport: (file: File) => void
+  onShare: () => void
+  shareCopied: boolean
   importError: string | null
+  shareNotice: string | null
+  shareError: string | null
   onClearImportError: () => void
   theme: Theme
   onToggleTheme: () => void
@@ -15,7 +19,11 @@ export function Toolbar({
   onAdd,
   onExport,
   onImport,
+  onShare,
+  shareCopied,
   importError,
+  shareNotice,
+  shareError,
   onClearImportError,
   theme,
   onToggleTheme,
@@ -36,6 +44,14 @@ export function Toolbar({
         </button>
         <button type="button" className="btn btn-primary" onClick={onAdd}>
           + New
+        </button>
+        <button
+          type="button"
+          className="btn btn-ghost"
+          onClick={() => void onShare()}
+          title="Copy a link with your list embedded"
+        >
+          {shareCopied ? 'OK!' : 'Share'}
         </button>
         <button type="button" className="btn btn-ghost" onClick={onExport}>
           Save
@@ -64,9 +80,14 @@ export function Toolbar({
           }}
         />
       </div>
-      {importError && (
+      {shareNotice && (
+        <p className="toolbar-notice" role="status">
+          {shareNotice}
+        </p>
+      )}
+      {(importError || shareError) && (
         <p className="toolbar-error" role="alert">
-          Import failed: {importError}
+          {importError ? `Import failed: ${importError}` : shareError}
         </p>
       )}
     </div>

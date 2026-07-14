@@ -38,7 +38,12 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-top">
-          <h1 className="app-title">Built Shortcuts</h1>
+          <div className="app-brand">
+            <h1 className="app-title">Built Shortcuts</h1>
+            <p className="app-subtitle">
+              SELECT A BUILD · <span>PRESS START</span>
+            </p>
+          </div>
           <Toolbar
             onAdd={() => setFormMode({ type: 'add' })}
             onExport={exportBuilds}

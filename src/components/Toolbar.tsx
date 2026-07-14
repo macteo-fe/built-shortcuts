@@ -21,10 +21,10 @@ export function Toolbar({
     <div className="toolbar">
       <div className="toolbar-actions">
         <button type="button" className="btn btn-primary" onClick={onAdd}>
-          Add build
+          + New
         </button>
         <button type="button" className="btn btn-ghost" onClick={onExport}>
-          Export
+          Save
         </button>
         <button
           type="button"
@@ -34,7 +34,7 @@ export function Toolbar({
             fileRef.current?.click()
           }}
         >
-          Import
+          Load
         </button>
         <input
           ref={fileRef}

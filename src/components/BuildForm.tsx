@@ -158,7 +158,7 @@ export function BuildForm({ initial, onSubmit, onClose }: BuildFormProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <header className="modal-header">
-          <h2 id={titleId}>{isEdit ? 'Edit build' : 'Add build'}</h2>
+          <h2 id={titleId}>{isEdit ? 'EDIT QUEST' : 'NEW QUEST'}</h2>
           <button type="button" className="btn btn-icon" onClick={requestClose} aria-label="Close">
             ×
           </button>
@@ -219,7 +219,7 @@ export function BuildForm({ initial, onSubmit, onClose }: BuildFormProps) {
               ))}
             </div>
             <button type="button" className="btn btn-ghost btn-sm" onClick={addRow}>
-              + Add param
+              + Param
             </button>
             {errors.params && <span className="field-error">{errors.params}</span>}
           </fieldset>
@@ -250,10 +250,10 @@ export function BuildForm({ initial, onSubmit, onClose }: BuildFormProps) {
           </label>
           <footer className="modal-footer">
             <button type="button" className="btn btn-ghost" onClick={requestClose}>
-              Cancel
+              Exit
             </button>
             <button type="submit" className="btn btn-primary">
-              {isEdit ? 'Save' : 'Add'}
+              {isEdit ? 'Save' : 'Start'}
             </button>
           </footer>
         </form>

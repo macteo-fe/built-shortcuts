@@ -71,13 +71,13 @@ export function BuildCard({ build, onEdit, onDelete }: BuildCardProps) {
           Open
         </button>
         <button type="button" className="btn btn-ghost btn-sm" onClick={() => void handleCopy()}>
-          {copied ? 'Copied' : 'Copy'}
+          {copied ? 'OK!' : 'Copy'}
         </button>
         <button type="button" className="btn btn-ghost btn-sm" onClick={() => onEdit(build)}>
           Edit
         </button>
         <button type="button" className="btn btn-danger btn-sm" onClick={handleDelete}>
-          Delete
+          Del
         </button>
       </div>
     </article>

@@ -21,9 +21,9 @@ export function BuildList({
   if (!hasAny) {
     return (
       <div className="empty-state">
-        <p>No builds saved yet.</p>
+        <p>NO BUILDS IN INVENTORY</p>
         <button type="button" className="btn btn-primary" onClick={onAdd}>
-          Add your first build
+          Insert coin
         </button>
       </div>
     )
@@ -32,7 +32,7 @@ export function BuildList({
   if (builds.length === 0) {
     return (
       <div className="empty-state">
-        <p>No builds match “{search}”.</p>
+        <p>NO MATCH FOR “{search}”</p>
       </div>
     )
   }

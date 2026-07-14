@@ -9,7 +9,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
       <span className="visually-hidden">Search builds</span>
       <input
         type="search"
-        placeholder="Search by name, game id, URL, or params…"
+        placeholder="SEARCH LEVEL / ID / URL…"
         value={value}
         onChange={(e) => onChange(e.target.value)}
         autoComplete="off"

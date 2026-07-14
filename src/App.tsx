@@ -4,6 +4,7 @@ import { BuildList } from './components/BuildList'
 import { SearchBar } from './components/SearchBar'
 import { Toolbar } from './components/Toolbar'
 import { useBuilds } from './hooks/useBuilds'
+import { useTheme } from './hooks/useTheme'
 import type { BuildEntry, BuildInput } from './types'
 
 type FormMode = { type: 'closed' } | { type: 'add' } | { type: 'edit'; build: BuildEntry }
@@ -22,6 +23,7 @@ export default function App() {
     importError,
     clearImportError,
   } = useBuilds()
+  const { theme, toggleTheme } = useTheme()
 
   const [formMode, setFormMode] = useState<FormMode>({ type: 'closed' })
 
@@ -50,6 +52,8 @@ export default function App() {
             onImport={(file) => void importBuilds(file)}
             importError={importError}
             onClearImportError={clearImportError}
+            theme={theme}
+            onToggleTheme={toggleTheme}
           />
         </div>
         <SearchBar value={search} onChange={setSearch} />

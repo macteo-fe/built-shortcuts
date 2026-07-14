@@ -1,7 +1,21 @@
+/* Shared tokens */
 :root {
+  --pixel: 3px;
+  --font-display: 'Press Start 2P', cursive;
+  --font-body: 'VT323', monospace;
+  --hard-shadow: #000;
+}
+
+/* Dark (default) */
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
   --bg: #0a0c18;
   --bg-panel: #14182a;
   --bg-panel-2: #1c2238;
+  --bg-input: #0a0c18;
+  --bg-media-a: #1a2035;
+  --bg-media-b: #12182a;
   --border: #3d4a6b;
   --border-hi: #6b7aab;
   --text: #e6ecff;
@@ -11,10 +25,107 @@
   --accent-hot: #ff6b6b;
   --danger: #ff5c7a;
   --shadow: #05060d;
-  --pixel: 3px;
-  --font-display: 'Press Start 2P', cursive;
-  --font-body: 'VT323', monospace;
-  color-scheme: dark;
+  --btn-edge: #1a2030;
+  --title-shadow-a: #7a5a00;
+  --title-shadow-b: #3d2e00;
+  --title-shadow-hi: #ffe9a0;
+  --id-border: #5a4818;
+  --modal-ring: #5a4818;
+  --modal-header-top: #222844;
+  --btn-primary-top: #8affad;
+  --btn-primary-bot: #2db55a;
+  --btn-primary-text: #062214;
+  --btn-primary-border: #1a5c32;
+  --btn-primary-hover-top: #b6ffcf;
+  --btn-primary-hover-mid: #78ffa5;
+  --btn-primary-hover-bot: #3cd46a;
+  --btn-ghost-top: #2a3350;
+  --btn-ghost-bot: #12182a;
+  --btn-danger-top: #ff8fa3;
+  --btn-danger-bot: #c2304c;
+  --btn-danger-text: #2a0510;
+  --btn-danger-border: #7a1830;
+  --scanline: rgba(0, 0, 0, 0.08);
+  --scanline-blend: multiply;
+  --accent-glow: rgba(92, 255, 141, 0.35);
+  --accent-glow-soft: rgba(92, 255, 141, 0.2);
+  --accent-grid: rgba(92, 255, 141, 0.03);
+  --link-glow: rgba(92, 255, 141, 0.4);
+  --body-veil: linear-gradient(rgba(10, 12, 24, 0.55), rgba(10, 12, 24, 0.75));
+  --body-base: linear-gradient(180deg, #12162a 0%, #0a0c18 45%, #080a14 100%);
+  --body-glow-a: radial-gradient(circle at 20% 10%, rgba(255, 216, 77, 0.12), transparent 35%);
+  --body-glow-b: radial-gradient(circle at 90% 0%, rgba(92, 255, 141, 0.1), transparent 40%);
+  --modal-veil: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.72) 0,
+    rgba(0, 0, 0, 0.72) 3px,
+    rgba(0, 0, 0, 0.8) 3px,
+    rgba(0, 0, 0, 0.8) 4px
+  );
+  --panel-wash: rgba(10, 12, 24, 0.55);
+  --inset-hi: rgba(255, 255, 255, 0.06);
+  --pixel-ink: #000;
+}
+
+/* Light — sunny arcade cabinet */
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #c8daf0;
+  --bg-panel: #f3f7fc;
+  --bg-panel-2: #e4eef8;
+  --bg-input: #ffffff;
+  --bg-media-a: #d5e4f4;
+  --bg-media-b: #b8cce3;
+  --border: #3a5575;
+  --border-hi: #2a4060;
+  --text: #142033;
+  --text-muted: #4a607c;
+  --accent: #0f8f4a;
+  --accent-2: #b87a00;
+  --accent-hot: #d63b55;
+  --danger: #d63b55;
+  --shadow: #7a90a8;
+  --btn-edge: #2a4060;
+  --title-shadow-a: #8a6200;
+  --title-shadow-b: #5a4000;
+  --title-shadow-hi: #fff3c4;
+  --id-border: #8a6a18;
+  --modal-ring: #8a6a18;
+  --modal-header-top: #dce8f5;
+  --btn-primary-top: #6dff9c;
+  --btn-primary-bot: #1a9a4a;
+  --btn-primary-text: #043018;
+  --btn-primary-border: #0d5c30;
+  --btn-primary-hover-top: #9affbf;
+  --btn-primary-hover-mid: #5aefa0;
+  --btn-primary-hover-bot: #28b85c;
+  --btn-ghost-top: #ffffff;
+  --btn-ghost-bot: #d5e2f0;
+  --btn-danger-top: #ff9aab;
+  --btn-danger-bot: #b02840;
+  --btn-danger-text: #2a0510;
+  --btn-danger-border: #7a1830;
+  --scanline: rgba(40, 60, 90, 0.05);
+  --scanline-blend: multiply;
+  --accent-glow: rgba(15, 143, 74, 0.3);
+  --accent-glow-soft: rgba(15, 143, 74, 0.18);
+  --accent-grid: rgba(15, 143, 74, 0.05);
+  --link-glow: rgba(15, 143, 74, 0.35);
+  --body-veil: linear-gradient(rgba(200, 218, 240, 0.35), rgba(180, 200, 225, 0.55));
+  --body-base: linear-gradient(180deg, #e8f2fc 0%, #c8daf0 50%, #b4c8e0 100%);
+  --body-glow-a: radial-gradient(circle at 20% 10%, rgba(184, 122, 0, 0.14), transparent 35%);
+  --body-glow-b: radial-gradient(circle at 90% 0%, rgba(15, 143, 74, 0.12), transparent 40%);
+  --modal-veil: repeating-linear-gradient(
+    to bottom,
+    rgba(40, 60, 90, 0.35) 0,
+    rgba(40, 60, 90, 0.35) 3px,
+    rgba(40, 60, 90, 0.45) 3px,
+    rgba(40, 60, 90, 0.45) 4px
+  );
+  --panel-wash: rgba(255, 255, 255, 0.55);
+  --inset-hi: rgba(255, 255, 255, 0.65);
+  --pixel-ink: #2a4060;
+  --hard-shadow: #2a4060;
 }
 
 *,
@@ -39,18 +150,19 @@ body {
   image-rendering: pixelated;
   background-color: var(--bg);
   background-image:
-    linear-gradient(rgba(10, 12, 24, 0.55), rgba(10, 12, 24, 0.75)),
+    var(--body-veil),
     repeating-linear-gradient(
       0deg,
       transparent,
       transparent 2px,
-      rgba(92, 255, 141, 0.03) 2px,
-      rgba(92, 255, 141, 0.03) 4px
+      var(--accent-grid) 2px,
+      var(--accent-grid) 4px
     ),
-    linear-gradient(180deg, #12162a 0%, #0a0c18 45%, #080a14 100%),
-    radial-gradient(circle at 20% 10%, rgba(255, 216, 77, 0.12), transparent 35%),
-    radial-gradient(circle at 90% 0%, rgba(92, 255, 141, 0.1), transparent 40%);
+    var(--body-base),
+    var(--body-glow-a),
+    var(--body-glow-b);
   background-attachment: fixed;
+  transition: color 0.15s steps(2), background-color 0.15s steps(2);
 }
 
 body::after {
@@ -63,10 +175,10 @@ body::after {
     to bottom,
     transparent 0,
     transparent 3px,
-    rgba(0, 0, 0, 0.08) 3px,
-    rgba(0, 0, 0, 0.08) 4px
+    var(--scanline) 3px,
+    var(--scanline) 4px
   );
-  mix-blend-mode: multiply;
+  mix-blend-mode: var(--scanline-blend);
 }
 
 a {
@@ -76,7 +188,7 @@ a {
 
 a:hover {
   color: var(--accent);
-  text-shadow: 0 0 0 #000, 2px 0 0 rgba(92, 255, 141, 0.4);
+  text-shadow: 0 0 0 var(--pixel-ink), 2px 0 0 var(--link-glow);
 }
 
 .visually-hidden {
@@ -91,12 +203,11 @@ a:hover {
   border: 0;
 }
 
-/* Chunky pixel frame helper */
 .pixel-frame {
   border: var(--pixel) solid var(--border);
   box-shadow:
     inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 var(--shadow),
-    inset var(--pixel) var(--pixel) 0 rgba(255, 255, 255, 0.06),
+    inset var(--pixel) var(--pixel) 0 var(--inset-hi),
     var(--pixel) var(--pixel) 0 var(--shadow);
   border-radius: 0;
   background: var(--bg-panel);
@@ -139,10 +250,10 @@ a:hover {
   line-height: 1.5;
   color: var(--accent-2);
   text-shadow:
-    3px 0 0 #7a5a00,
-    0 3px 0 #7a5a00,
-    3px 3px 0 #3d2e00,
-    -1px -1px 0 #ffe9a0;
+    3px 0 0 var(--title-shadow-a),
+    0 3px 0 var(--title-shadow-a),
+    3px 3px 0 var(--title-shadow-b),
+    -1px -1px 0 var(--title-shadow-hi);
 }
 
 .app-subtitle {
@@ -189,7 +300,7 @@ a:hover {
   font-size: 1.35rem;
   box-shadow:
     inset var(--pixel) var(--pixel) 0 var(--shadow),
-    var(--pixel) var(--pixel) 0 #000;
+    var(--pixel) var(--pixel) 0 var(--hard-shadow);
 }
 
 .search-bar input::placeholder {
@@ -202,7 +313,7 @@ a:hover {
   border-color: var(--accent);
   box-shadow:
     inset var(--pixel) var(--pixel) 0 var(--shadow),
-    0 0 0 var(--pixel) rgba(92, 255, 141, 0.35);
+    0 0 0 var(--pixel) var(--accent-glow);
 }
 
 .btn {
@@ -211,7 +322,7 @@ a:hover {
   justify-content: center;
   gap: 0.35rem;
   padding: 0.55rem 0.85rem;
-  border: var(--pixel) solid #1a2030;
+  border: var(--pixel) solid var(--btn-edge);
   border-radius: 0;
   font-family: var(--font-display);
   font-size: 0.55rem;
@@ -225,14 +336,14 @@ a:hover {
   box-shadow:
     inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 rgba(0, 0, 0, 0.35),
     inset var(--pixel) var(--pixel) 0 rgba(255, 255, 255, 0.25),
-    var(--pixel) var(--pixel) 0 #000;
+    var(--pixel) var(--pixel) 0 var(--hard-shadow);
 }
 
 .btn:active {
   transform: translate(2px, 2px);
   box-shadow:
     inset var(--pixel) var(--pixel) 0 rgba(0, 0, 0, 0.45),
-    1px 1px 0 #000;
+    1px 1px 0 var(--hard-shadow);
 }
 
 .btn-sm {
@@ -241,17 +352,32 @@ a:hover {
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, #8affad 0%, var(--accent) 45%, #2db55a 100%);
-  color: #062214;
-  border-color: #1a5c32;
+  background: linear-gradient(
+    180deg,
+    var(--btn-primary-top) 0%,
+    var(--accent) 45%,
+    var(--btn-primary-bot) 100%
+  );
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-border);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #b6ffcf 0%, #78ffa5 50%, #3cd46a 100%);
+  background: linear-gradient(
+    180deg,
+    var(--btn-primary-hover-top) 0%,
+    var(--btn-primary-hover-mid) 50%,
+    var(--btn-primary-hover-bot) 100%
+  );
 }
 
 .btn-ghost {
-  background: linear-gradient(180deg, #2a3350 0%, var(--bg-panel-2) 55%, #12182a 100%);
+  background: linear-gradient(
+    180deg,
+    var(--btn-ghost-top) 0%,
+    var(--bg-panel-2) 55%,
+    var(--btn-ghost-bot) 100%
+  );
   color: var(--text);
   border-color: var(--border);
 }
@@ -262,9 +388,14 @@ a:hover {
 }
 
 .btn-danger {
-  background: linear-gradient(180deg, #ff8fa3 0%, var(--danger) 50%, #c2304c 100%);
-  color: #2a0510;
-  border-color: #7a1830;
+  background: linear-gradient(
+    180deg,
+    var(--btn-danger-top) 0%,
+    var(--danger) 50%,
+    var(--btn-danger-bot) 100%
+  );
+  color: var(--btn-danger-text);
+  border-color: var(--btn-danger-border);
 }
 
 .btn-danger:hover {
@@ -279,7 +410,7 @@ a:hover {
   font-size: 0.7rem;
   line-height: 1;
   padding: 0.35rem 0.5rem;
-  box-shadow: var(--pixel) var(--pixel) 0 #000;
+  box-shadow: var(--pixel) var(--pixel) 0 var(--hard-shadow);
 }
 
 .btn-icon:hover {
@@ -306,9 +437,9 @@ a:hover {
   border: var(--pixel) solid var(--border);
   border-radius: 0;
   box-shadow:
-    inset var(--pixel) var(--pixel) 0 rgba(255, 255, 255, 0.05),
-    inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 rgba(0, 0, 0, 0.35),
-    var(--pixel) var(--pixel) 0 #000;
+    inset var(--pixel) var(--pixel) 0 var(--inset-hi),
+    inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 rgba(0, 0, 0, 0.25),
+    var(--pixel) var(--pixel) 0 var(--hard-shadow);
   position: relative;
 }
 
@@ -328,10 +459,10 @@ a:hover {
 .build-card:hover {
   border-color: var(--accent);
   box-shadow:
-    inset var(--pixel) var(--pixel) 0 rgba(255, 255, 255, 0.06),
-    inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 rgba(0, 0, 0, 0.35),
-    0 0 0 2px rgba(92, 255, 141, 0.2),
-    var(--pixel) var(--pixel) 0 #000;
+    inset var(--pixel) var(--pixel) 0 var(--inset-hi),
+    inset calc(var(--pixel) * -1) calc(var(--pixel) * -1) 0 rgba(0, 0, 0, 0.25),
+    0 0 0 2px var(--accent-glow-soft),
+    var(--pixel) var(--pixel) 0 var(--hard-shadow);
 }
 
 .build-card-media {
@@ -340,13 +471,13 @@ a:hover {
   border: var(--pixel) solid var(--border-hi);
   border-radius: 0;
   overflow: hidden;
-  background:
-    repeating-conic-gradient(#1a2035 0% 25%, #12182a 0% 50%) 0 0 / 8px 8px;
+  background: repeating-conic-gradient(var(--bg-media-a) 0% 25%, var(--bg-media-b) 0% 50%) 0 0 /
+    8px 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: inset 2px 2px 0 #000;
+  box-shadow: inset 2px 2px 0 var(--pixel-ink);
 }
 
 .build-card-media img {
@@ -362,7 +493,7 @@ a:hover {
   font-size: 0.55rem;
   color: var(--accent);
   letter-spacing: 0.04em;
-  text-shadow: 2px 2px 0 #000;
+  text-shadow: 2px 2px 0 var(--pixel-ink);
 }
 
 .build-card-body {
@@ -392,9 +523,9 @@ a:hover {
   font-family: var(--font-body);
   font-size: 1.05rem;
   color: var(--accent-2);
-  background: #0a0c18;
+  background: var(--bg-input);
   padding: 0.05rem 0.4rem;
-  border: 2px solid #5a4818;
+  border: 2px solid var(--id-border);
 }
 
 .build-url {
@@ -440,15 +571,15 @@ a:hover {
       -45deg,
       transparent,
       transparent 8px,
-      rgba(92, 255, 141, 0.03) 8px,
-      rgba(92, 255, 141, 0.03) 16px
+      var(--accent-grid) 8px,
+      var(--accent-grid) 16px
     ),
     var(--bg-panel);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.1rem;
-  box-shadow: var(--pixel) var(--pixel) 0 #000;
+  box-shadow: var(--pixel) var(--pixel) 0 var(--hard-shadow);
 }
 
 .empty-state p {
@@ -463,14 +594,7 @@ a:hover {
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.72) 0,
-      rgba(0, 0, 0, 0.72) 3px,
-      rgba(0, 0, 0, 0.8) 3px,
-      rgba(0, 0, 0, 0.8) 4px
-    );
+  background: var(--modal-veil);
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -485,9 +609,9 @@ a:hover {
   border: var(--pixel) solid var(--accent-2);
   border-radius: 0;
   box-shadow:
-    inset var(--pixel) var(--pixel) 0 rgba(255, 255, 255, 0.06),
-    0 0 0 var(--pixel) #5a4818,
-    6px 6px 0 #000;
+    inset var(--pixel) var(--pixel) 0 var(--inset-hi),
+    0 0 0 var(--pixel) var(--modal-ring),
+    6px 6px 0 var(--hard-shadow);
 }
 
 .modal-header {
@@ -496,7 +620,7 @@ a:hover {
   justify-content: space-between;
   padding: 1rem 1.1rem 0.55rem;
   border-bottom: var(--pixel) solid var(--border);
-  background: linear-gradient(180deg, #222844 0%, var(--bg-panel) 100%);
+  background: linear-gradient(180deg, var(--modal-header-top) 0%, var(--bg-panel) 100%);
 }
 
 .modal-header h2 {
@@ -506,7 +630,7 @@ a:hover {
   font-weight: 400;
   line-height: 1.5;
   color: var(--accent);
-  text-shadow: 2px 2px 0 #000;
+  text-shadow: 2px 2px 0 var(--pixel-ink);
 }
 
 .build-form {
@@ -536,19 +660,19 @@ a:hover {
   padding: 0.5rem 0.65rem;
   border: var(--pixel) solid var(--border);
   border-radius: 0;
-  background: #0a0c18;
+  background: var(--bg-input);
   color: var(--text);
   font-family: var(--font-body);
   font-size: 1.25rem;
-  box-shadow: inset 2px 2px 0 #000;
+  box-shadow: inset 2px 2px 0 var(--pixel-ink);
 }
 
 .build-form input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow:
-    inset 2px 2px 0 #000,
-    0 0 0 2px rgba(92, 255, 141, 0.25);
+    inset 2px 2px 0 var(--pixel-ink),
+    0 0 0 2px var(--accent-glow-soft);
 }
 
 .params-fieldset {
@@ -558,7 +682,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
-  background: rgba(10, 12, 24, 0.55);
+  background: var(--panel-wash);
 }
 
 .params-fieldset legend {

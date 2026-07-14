@@ -633,6 +633,91 @@ a:hover {
   text-shadow: 2px 2px 0 var(--pixel-ink);
 }
 
+.add-mode-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: var(--pixel) solid var(--border);
+}
+
+.add-mode-tab {
+  appearance: none;
+  margin: 0;
+  padding: 0.7rem 0.5rem;
+  border: none;
+  border-right: var(--pixel) solid var(--border);
+  background: var(--bg-panel-2);
+  color: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 0.48rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.add-mode-tab:last-child {
+  border-right: none;
+}
+
+.add-mode-tab.is-active {
+  background: var(--bg-panel);
+  color: var(--accent);
+  box-shadow: inset 0 calc(var(--pixel) * -1) 0 var(--accent);
+}
+
+.add-mode-tab:hover:not(.is-active) {
+  color: var(--accent-2);
+}
+
+.paste-url-input {
+  width: 100%;
+  resize: vertical;
+  min-height: 5.5rem;
+  padding: 0.5rem 0.65rem;
+  border: var(--pixel) solid var(--border);
+  border-radius: 0;
+  background: var(--bg-input);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1.2rem;
+  line-height: 1.3;
+  box-shadow: inset 2px 2px 0 var(--pixel-ink);
+}
+
+.paste-url-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow:
+    inset 2px 2px 0 var(--pixel-ink),
+    0 0 0 2px var(--accent-glow-soft);
+}
+
+.paste-help,
+.paste-hint {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.paste-hint {
+  color: var(--accent);
+  border: var(--pixel) solid var(--border);
+  background: var(--panel-wash);
+  padding: 0.45rem 0.55rem;
+}
+
+.modal-footer-split {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-footer-actions {
+  display: flex;
+  gap: 0.55rem;
+}
+
 .build-form {
   display: flex;
   flex-direction: column;

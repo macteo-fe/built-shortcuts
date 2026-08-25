@@ -17,6 +17,16 @@ export type BuildInput = Omit<BuildEntry, 'id' | 'createdAt' | 'updatedAt'> & {
   id?: string
 }
 
+export type BuildSortOption =
+  | 'updated-desc'
+  | 'updated-asc'
+  | 'created-desc'
+  | 'created-asc'
+  | 'name-asc'
+  | 'name-desc'
+  | 'game-id-asc'
+  | 'game-id-desc'
+
 export type ParamRow = {
   id: string
   key: string

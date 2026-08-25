@@ -9,7 +9,7 @@ import {
   saveBuilds,
 } from '../lib/storage'
 import { paramsSearchText } from '../lib/params'
-import type { BuildEntry, BuildInput, BuildParams } from '../types'
+import type { BuildEntry, BuildInput, BuildParams, BuildSortOption } from '../types'
 
 function newId(): string {
   return crypto.randomUUID()
@@ -28,6 +28,41 @@ function normalizeParamsInput(params: BuildParams): BuildParams {
     out[k] = value
   }
   return out
+}
+
+const buildNameCollator = new Intl.Collator(undefined, {
+  numeric: true,
+  sensitivity: 'base',
+})
+
+function titleForSort(build: BuildEntry): string {
+  return build.gameName || build.gameId
+}
+
+function timestampForSort(value: string): number {
+  const timestamp = new Date(value).getTime()
+  return Number.isFinite(timestamp) ? timestamp : 0
+}
+
+function compareBuilds(a: BuildEntry, b: BuildEntry, sortBy: BuildSortOption): number {
+  switch (sortBy) {
+    case 'created-asc':
+      return timestampForSort(a.createdAt) - timestampForSort(b.createdAt)
+    case 'created-desc':
+      return timestampForSort(b.createdAt) - timestampForSort(a.createdAt)
+    case 'game-id-asc':
+      return buildNameCollator.compare(a.gameId, b.gameId)
+    case 'game-id-desc':
+      return buildNameCollator.compare(b.gameId, a.gameId)
+    case 'name-asc':
+      return buildNameCollator.compare(titleForSort(a), titleForSort(b))
+    case 'name-desc':
+      return buildNameCollator.compare(titleForSort(b), titleForSort(a))
+    case 'updated-asc':
+      return timestampForSort(a.updatedAt) - timestampForSort(b.updatedAt)
+    case 'updated-desc':
+      return timestampForSort(b.updatedAt) - timestampForSort(a.updatedAt)
+  }
 }
 
 function bootFromStorageAndShare(): {
@@ -56,6 +91,7 @@ export function useBuilds() {
   const [boot] = useState(bootFromStorageAndShare)
   const [builds, setBuilds] = useState<BuildEntry[]>(() => boot.builds)
   const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState<BuildSortOption>('updated-desc')
   const [importError, setImportError] = useState<string | null>(null)
   const [shareNotice, setShareNotice] = useState<string | null>(() => boot.shareNotice)
   const [shareError, setShareError] = useState<string | null>(() => boot.shareError)
@@ -76,15 +112,21 @@ export function useBuilds() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase()
-    if (!q) return builds
-    return builds.filter((b) => {
-      const haystack = [b.gameName, b.gameId, b.url, paramsSearchText(b.params)]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase()
-      return haystack.includes(q)
+    const visible = q
+      ? builds.filter((b) => {
+          const haystack = [b.gameName, b.gameId, b.url, paramsSearchText(b.params)]
+            .filter(Boolean)
+            .join(' ')
+            .toLowerCase()
+          return haystack.includes(q)
+        })
+      : builds
+
+    return [...visible].sort((a, b) => {
+      const result = compareBuilds(a, b, sortBy)
+      return result || buildNameCollator.compare(a.id, b.id)
     })
-  }, [builds, search])
+  }, [builds, search, sortBy])
 
   const addBuild = useCallback((input: BuildInput) => {
     const now = new Date().toISOString()
@@ -171,6 +213,8 @@ export function useBuilds() {
     filtered,
     search,
     setSearch,
+    sortBy,
+    setSortBy,
     addBuild,
     updateBuild,
     deleteBuild,

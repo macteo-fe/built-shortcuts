@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { BuildForm } from './components/BuildForm'
 import { BuildList } from './components/BuildList'
+import { BuildSortSelect } from './components/BuildSortSelect'
 import { SearchBar } from './components/SearchBar'
 import { Toolbar } from './components/Toolbar'
 import { useBuilds } from './hooks/useBuilds'
@@ -15,6 +16,8 @@ export default function App() {
     filtered,
     search,
     setSearch,
+    sortBy,
+    setSortBy,
     addBuild,
     updateBuild,
     deleteBuild,
@@ -64,7 +67,10 @@ export default function App() {
             onToggleTheme={toggleTheme}
           />
         </div>
-        <SearchBar value={search} onChange={setSearch} />
+        <div className="list-controls">
+          <SearchBar value={search} onChange={setSearch} />
+          <BuildSortSelect value={sortBy} onChange={setSortBy} />
+        </div>
       </header>
 
       <main className="app-main">
